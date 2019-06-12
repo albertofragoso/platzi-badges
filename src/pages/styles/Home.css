@@ -1,0 +1,17 @@
+.Home {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: url('../../images/stars.svg'), #1B1B25;
+}
+
+.Home__info {
+  color: #FFFFFF;
+  margin: 2rem;
+}
+
+.Home__info > * {
+  margin-bottom: 0.5rem;
+}
