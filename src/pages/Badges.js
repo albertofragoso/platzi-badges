@@ -4,49 +4,37 @@ import { Link } from 'react-router-dom'
 import './styles/Badges.css'
 import logo from '../images/platziconf-logo.svg'
 import BadgesList from '../components/BadgesList'
+import PageLoading from '../components/PageLoading'
 
 class Badges extends Component {
 
-  state= {
-    data: [
-      {
-        id: '1',
-        firstName: 'Oswaldo',
-        lastName: '',
-        email: '',
-        jobTitle: '',
-        website: '',
-      },
-      {
-        id: '2',
-        firstName: 'Karla',
-        lastName: '',
-        email: '',
-        jobTitle: '',
-        website: '',
-      },
-      {
-        id: '3',
-        firstName: 'Ana',
-        lastName: '',
-        email: '',
-        jobTitle: '',
-        website: '',
-      },
-      {
-        id: '4',
-        firstName: 'Nicky',
-        lastName: '',
-        email: '',
-        jobTitle: '',
-        website: '',
-      }
-    ]
+  state = {
+    loading: true,
+    error: null,
+    data: undefined
+  }
 
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData() {
+    this.setState({ data: [], loading: true, error: null })
+
+    try {
+
+    } catch(error) {
+      this.setState({ loading: false, error })
+    }
   }
 
   render(){
-    const { data } = this.state
+    const { loading, data, error }  = this.state
+
+    if(loading) return(<PageLoading />)
+
+    if(error) return(<p>{error.message}</p>)
+
     return (
       <>
         <div className="Badges">
