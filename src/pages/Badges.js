@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom'
 
 import './styles/Badges.css'
@@ -50,7 +49,6 @@ class Badges extends Component {
     const { data } = this.state
     return (
       <>
-        <Navbar />
         <div className="Badges">
           <div className="Badges__hero">
             <div className="Badges__container">
