@@ -6,6 +6,7 @@ import logo from '../images/platziconf-logo.svg'
 import BadgesList from '../components/BadgesList'
 import PageLoading from '../components/PageLoading'
 import PageError from '../components/PageError'
+import api from '../api'
 
 class Badges extends Component {
 
@@ -19,11 +20,12 @@ class Badges extends Component {
     this.fetchData()
   }
 
-  fetchData() {
+  fetchData = async () => {
     this.setState({ data: [], loading: true, error: null })
 
     try {
-
+      const data = await api.badges.list()
+      this.setState({ data, loading: false })
     } catch(error) {
       this.setState({ loading: false, error })
     }
