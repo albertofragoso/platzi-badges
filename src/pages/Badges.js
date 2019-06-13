@@ -5,6 +5,7 @@ import './styles/Badges.css'
 import logo from '../images/platziconf-logo.svg'
 import BadgesList from '../components/BadgesList'
 import PageLoading from '../components/PageLoading'
+import PageError from '../components/PageError'
 
 class Badges extends Component {
 
@@ -33,7 +34,7 @@ class Badges extends Component {
 
     if(loading) return(<PageLoading />)
 
-    if(error) return(<p>{error.message}</p>)
+    if(error) return(<PageError error={error} />)
 
     return (
       <>
