@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 
-import './styles/BadgeNew.css'
+import './styles/BadgeEdit.css'
 import header from '../images/platziconf-logo.svg'
 import Badge from '../components/Badge'
 import Form from '../components/Form'
 import api from '../api'
 import PageLoading from '../components/PageLoading';
 
-class BadgeNew extends Component {
+class BadgeEdit extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: null,
     form: {
       firstName: '',
@@ -17,6 +17,21 @@ class BadgeNew extends Component {
       email: '',
       jobTitle: '',
       website: ''
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = async () => {
+    try {
+      const { badgeId } = this.props.match.params
+      this.setState({ loading: true })
+      const data = await api.badges.read(badgeId)
+      this.setState({ loading: false, form: data })
+    } catch(error) {
+      this.setState({ loading: false, error })
     }
   }
 
@@ -32,10 +47,11 @@ class BadgeNew extends Component {
 
   handleOnSubmit = async e => {
     e.preventDefault()
+    const { badgeId } = this.props.match.params
     const { form } = this.state
     this.setState({ loading: true, err: null })
     try {
-      await api.badges.create(form)
+      await api.badges.update(badgeId, form)
       this.setState({ loading: false })
 
       this.props.history.push('/badges')
@@ -52,8 +68,8 @@ class BadgeNew extends Component {
 
     return (
       <>
-        <div className="BadgeNew__hero">
-          <img className="BadgeNew__hero-image" src={header} alt="Logo" />
+        <div className="BadgeEdit__hero">
+          <img className="BadgeEdit__hero-image" src={header} alt="Logo" />
         </div>
 
         <div className="container">
@@ -68,7 +84,7 @@ class BadgeNew extends Component {
               />
             </div>
             <div className="col-6">
-              <h1> New Attendant </h1>
+              <h1> Edit Attendant </h1>
               <Form handleOnChange={this.handleOnChange} handleOnSubmit={this.handleOnSubmit} form={this.state.form} error={error} />
             </div>
           </div>
@@ -78,4 +94,4 @@ class BadgeNew extends Component {
   }
 }
 
-export default BadgeNew
+export default BadgeEdit
