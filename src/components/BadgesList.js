@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import md5 from 'md5'
 
 import './styles/BadgesList.css'
 
@@ -21,7 +22,7 @@ class BadgesList extends Component {
           badges.map(badge => {
             return (
               <li key={badge.id} className="BadgesListItem">
-                <img className="BadgeListItem__avatar" src="https://avatars2.githubusercontent.com/u/3421560?s=400&v=4" alt="Profile badge"/>
+                <img className="BadgeListItem__avatar" src={`https://www.gravatar.com/avatar/${md5(badge.email)}?d=identicon`}  alt="Profile badge"/>
                 <div>
                   <strong>{badge.firstName} {badge.lastName}</strong>
                   <br />{badge.jobTitle}

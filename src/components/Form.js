@@ -2,24 +2,14 @@ import React, { Component } from 'react'
 
 class Form extends Component {
 
-  handleClick = e => {
-    console.log('Button was clicked.')
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    console.log('Form submit')
-    console.log(this.state)
-  }
-
   render(){
-    const { handleOnChange, form } = this.props
+    const { handleOnChange, handleOnSubmit, form, error } = this.props
     const { firstName, lastName, email, jobTitle, website } = form
 
     return(
     <>
       <h1> New Attendant </h1>
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleOnSubmit}>
         <div className="form-group">
           <label>First Name</label>
           <input 
@@ -77,6 +67,7 @@ class Form extends Component {
 
         <button className="btn btn-primary" onClick={this.handleClick}>Save</button>
       </form>
+      {error && <p className="text-danger">{error.message}</p>}
     </>
     )
   }

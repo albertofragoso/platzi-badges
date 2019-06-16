@@ -14,7 +14,7 @@ function Home() {
         <p>... and something else</p>
         <Link to="/badges" className="btn btn-primary">Entrar</Link>
       </div>
-      <img src={astronauts} alt="Astronautas Conf" />
+      <img className="Home__info-image" src={astronauts} alt="Astronautas Conf" />
     </div>
   )
 }
