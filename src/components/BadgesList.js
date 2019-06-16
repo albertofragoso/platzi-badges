@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import BadgeListItem from './components/BadgeListItem'
+import BadgeListItem from './BadgeListItem'
 
 import './styles/BadgesList.css'
 
