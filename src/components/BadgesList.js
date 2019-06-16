@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import md5 from 'md5'
+import BadgeListItem from './components/BadgeListItem'
 
 import './styles/BadgesList.css'
 
@@ -22,12 +22,9 @@ class BadgesList extends Component {
           badges.map(badge => {
             return (
               <li key={badge.id} className="BadgesListItem">
-                <img className="BadgeListItem__avatar" src={`https://www.gravatar.com/avatar/${md5(badge.email)}?d=identicon`}  alt="Profile badge"/>
-                <div>
-                  <strong>{badge.firstName} {badge.lastName}</strong>
-                  <br />{badge.jobTitle}
-                  <br />{badge.website}
-                </div>
+                <Link className="text-reset text-decoration-none"  to={`/badges/${badges.id}`}>
+                  <BadgeListItem badge={badge} />
+                </Link>
               </li>
             )
           })
