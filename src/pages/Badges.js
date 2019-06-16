@@ -5,6 +5,7 @@ import './styles/Badges.css'
 import logo from '../images/platziconf-logo.svg'
 import BadgesList from '../components/BadgesList'
 import PageLoading from '../components/PageLoading'
+import MiniLoader from '../components/MiniLoader'
 import PageError from '../components/PageError'
 import api from '../api'
 
@@ -18,14 +19,20 @@ class Badges extends Component {
 
   componentDidMount() {
     this.fetchData()
+
+    this.intervalId = setInterval(this.fetchData, 5000)
+  }
+
+  componentWillMount() {
+    clearInterval(this.intervalId)
   }
 
   fetchData = async () => {
-    this.setState({ data: [], loading: true, error: null })
+    this.setState({ loading: true, error: null })
 
     try {
       const data = await api.badges.list()
-      this.setState({ data, loading: false })
+      this.setState({ data: [], loading: false })
     } catch(error) {
       this.setState({ loading: false, error })
     }
@@ -34,7 +41,7 @@ class Badges extends Component {
   render(){
     const { loading, data, error }  = this.state
 
-    if(loading) return(<PageLoading />)
+    if(loading && !data) return(<PageLoading />)
 
     if(error) return(<PageError error={error} />)
 
@@ -57,6 +64,7 @@ class Badges extends Component {
 
           <BadgesList badges={data}/>
 
+          {loading && <MiniLoader />}
         </div>
       </>
     )
