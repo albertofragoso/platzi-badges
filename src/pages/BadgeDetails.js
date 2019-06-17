@@ -2,11 +2,12 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import Badge from '../components/Badge'
+import DeleteBadgeModal from '../components/DeleteBadgeModal'
 import './styles/BadgeDetails.css'
 import confLogo from '../images/platziconf-logo.svg'
 
 function BadgeDetails(props) {
-  const badge = this.props
+  const badge = props.badge
   return(
     <>
       <div className="BadgeDetails__hero">
@@ -35,6 +36,7 @@ function BadgeDetails(props) {
             </div>
             <div>
               <button className="btn btn-danger">Delete</button>
+              <DeleteBadgeModal modalIsOpen={props.modalIsOpen}  onClose={props.onClose} onDeleteBadge={props.onDeleteBadge} />
             </div>
           </div>
         </div>
